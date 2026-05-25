@@ -1,4 +1,6 @@
 ﻿using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks.Dataflow;
 
 Console.WriteLine("Hello, World!");
 /*int a;
@@ -8,45 +10,78 @@ b=a;
 Console.WriteLine("valor de a:"+a);
 Console.WriteLine("valor de b:"+b);*/
 
-Console.WriteLine("Seleccione una opcion: 1-Sumar 2-Restar 3-Multiplicar 4-Dividir");
-string opcionElegida= Console.ReadLine();
-int i=0;
+int continuar = 1; 
 
-Console.WriteLine("Ingrese los numeros");
-int a,b;
-Console.WriteLine("Ingrese a:");
-string valorA =Console.ReadLine();
-Console.WriteLine("Ingrese b:");
-string valorB= Console.ReadLine();
-bool resultadoa= int.TryParse(valorA, out a);
-bool resultadob=int.TryParse(valorB, out b);
-
-
-if ( int.TryParse(opcionElegida, out i))
+do 
 {
-    switch (i)
+    Console.WriteLine("Seleccione una opcion: 1-Sumar 2-Restar 3-Multiplicar 4-Dividir");
+    string opcionElegida = Console.ReadLine();
+    int i = 0;
+
+    Console.WriteLine("Ingrese los numeros");
+    
+    Console.WriteLine("Ingrese a:");
+    string valorA = Console.ReadLine();
+    
+    Console.WriteLine("Ingrese b:");
+    string valorB = Console.ReadLine();
+    
+    int a, b;
+    bool resultadoa = int.TryParse(valorA, out a);
+    bool resultadob = int.TryParse(valorB, out b);
+
+    if (resultadoa && resultadob)
     {
-        case 1:
-            int resultadoSuma=a+b;
-            Console.WriteLine("Resultado de la suma: "+resultadoSuma);
-        break;
-         case 2:
-            int resultadoResta=a-b;
-            Console.WriteLine("Resultado de la Resta: "+resultadoResta);
-        break;
-         case 3:
-            int resultadoMulti=a*b;
-            Console.WriteLine("Resultado de la Multiplicacion "+ resultadoMulti);
-        break;
-         case 4:
-            if (b==0)
+        if (int.TryParse(opcionElegida, out i))
+        {
+            switch (i)
             {
-            Console.WriteLine("No se puede divisir el Denominador es 0");
-            
+                case 1:
+                    int resultadoSuma = a + b;
+                    Console.WriteLine("Resultado de la suma: " + resultadoSuma);
+                    break;
+                case 2:
+                    int resultadoResta = a - b;
+                    Console.WriteLine("Resultado de la Resta: " + resultadoResta);
+                    break;
+                case 3:
+                    int resultadoMulti = a * b;
+                    Console.WriteLine("Resultado de la Multiplicacion: " + resultadoMulti);
+                    break;
+                case 4:
+                    if (b == 0)
+                    {
+                        Console.WriteLine("Error: No se puede dividir, el denominador es 0");
+                    }
+                    else
+                    {
+                        int resultadoDivi = a / b;
+                        Console.WriteLine("Resultado de la Division: " + resultadoDivi);
+                    }
+                    break;
+                default:
+                    Console.WriteLine("La opción elegida no existe en el menú.");
+                    break;
             }
-            int resultadoDivi=a/b;
-            Console.WriteLine("Resultado de la Division: "+resultadoDivi);
-        break;
-        
+        }
+        else 
+        {
+            Console.WriteLine("Opción de menú inválida.");
+        }
     }
-}
+    else
+    {
+        Console.WriteLine("Error: Ingresaste letras o símbolos en lugar de números.");
+    }
+
+    Console.WriteLine("\n¿Desea realizar otra operacion? 1-SI / 2-NO");
+    string c = Console.ReadLine();
+    
+    bool ok = int.TryParse(c, out continuar);
+    
+    if (!ok) 
+    {
+        continuar = 0; 
+    }
+
+} while (continuar == 1);
