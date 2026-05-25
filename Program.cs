@@ -10,11 +10,12 @@ b=a;
 Console.WriteLine("valor de a:"+a);
 Console.WriteLine("valor de b:"+b);*/
 
+
 int continuar = 1; 
 
 do 
 {
-    Console.WriteLine("Seleccione una opcion: 1-Sumar 2-Restar 3-Multiplicar 4-Dividir");
+    Console.WriteLine("Seleccione una opcion: 1-Sumar 2-Restar 3-Multiplicar 4-Dividir 5-Propiedades 6-Max-Min");
     string opcionElegida = Console.ReadLine();
     int i = 0;
 
@@ -58,6 +59,29 @@ do
                         int resultadoDivi = a / b;
                         Console.WriteLine("Resultado de la Division: " + resultadoDivi);
                     }
+                    break;
+                case 5:
+                    Console.WriteLine("Ingrese un numero para calcular propiedades:");
+                    string entrada = Console.ReadLine();
+                    float num;
+
+                    if (float.TryParse(entrada, out num))
+                    {
+                        Console.WriteLine("Valor absoluto: " + Math.Abs(num));
+                        Console.WriteLine("El cuadrado: " + Math.Pow(num, 2));
+                        Console.WriteLine("La raiz cuadrada: " + Math.Sqrt(num));
+                        Console.WriteLine("El seno: " + Math.Sin(num));
+                        Console.WriteLine("El coseno: " + Math.Cos(num));
+                        Console.WriteLine("Parte entera: " + Math.Truncate(num));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error: Valor inválido.");
+                    }
+                    break;
+                case 6: 
+                    Console.WriteLine("El número máximo es: " + Math.Max(a, b));
+                    Console.WriteLine("El número mínimo es: " + Math.Min(a, b));
                     break;
                 default:
                     Console.WriteLine("La opción elegida no existe en el menú.");
